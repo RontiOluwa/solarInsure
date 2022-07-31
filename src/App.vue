@@ -30,7 +30,7 @@ export default defineComponent({
     const { openMenu } = Toggle.openNavigation();
     const { closeMenu } = Toggle.closeNavigation();
 
-    // Set Navigatio base on Screen Size
+    // Set Navigation base on Screen Size
     const checkScreen = () => {
       if (screen.width > 1100) {
         openMenu();

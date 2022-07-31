@@ -43,8 +43,8 @@ import Card from "../components/Layout/Card.vue";
 import Input from "../components/Forms/Input.vue";
 import Button from "../components/Forms/Button.vue";
 import Toggle from "../utils/toggleNav";
-import { createToast } from "mosha-vue-toastify";
-import "mosha-vue-toastify/dist/style.css";
+import Validate from "../utils/Validate";
+import Toast from "../utils/Toast";
 
 export default defineComponent({
   name: "Add-User",
@@ -81,26 +81,15 @@ export default defineComponent({
 
     const sendData = () => {
       // Form Validation
-      if (email === undefined || email === "") {
-        createToast("Please Dont leave the Email Field Empty", {
-          type: "warning",
-        });
-      } else if (firstname === undefined || firstname === "") {
-        createToast("Please Dont leave the Firstname Field Empty", {
-          type: "warning",
-        });
-      } else if (lastname === undefined || lastname === "") {
-        createToast("Please Dont leave the Lastname Field Empty", {
-          type: "warning",
-        });
-      } else if (dob === undefined || dob === "") {
-        createToast("Please Dont leave the Date of Birth Field Empty", {
-          type: "warning",
-        });
+      if (
+        !Validate(email).empty() ||
+        !Validate(firstname).empty() ||
+        !Validate(lastname).empty() ||
+        !Validate(dob).empty()
+      ) {
+        Toast("Please Dont leave any Field Empty", "warning");
       } else {
-        createToast("Data Validated Successfully", {
-          type: "success",
-        });
+        Toast("Data Validated Successfully", "success");
         console.log(email, firstname, lastname, dob);
       }
     };

@@ -31,9 +31,9 @@ import { defineComponent } from "vue";
 import Input from "../components/Forms/Input.vue";
 import Button from "../components/Forms/Button.vue";
 import Card from "../components/Layout/Card.vue";
+import Validate from "../utils/Validate";
+import Toast from "../utils/Toast";
 import { useRouter } from "vue-router";
-import { createToast } from "mosha-vue-toastify";
-import "mosha-vue-toastify/dist/style.css";
 
 export default defineComponent({
   name: "Login",
@@ -53,18 +53,13 @@ export default defineComponent({
     };
 
     const signIn = () => {
-      if (email === undefined || email === "") {
-        createToast("Please Dont leave the Email Field Empty", {
-          type: "warning",
-        });
-      } else if (password === undefined || password === "") {
-        createToast("Please Dont leave the Password Field Empty", {
-          type: "warning",
-        });
+      if (!Validate(email).empty() || !Validate(password).empty()) {
+        Toast("Please do not leave any Field Empty", "warning");
+      } else if (!Validate(email).isEmail()) {
+        Toast("Please enter a valid email address", "warning");
+      } else if (!Validate(password).validatePassword().status) {
+        Toast(Validate(password).validatePassword().mssg, "warning");
       } else {
-        createToast("Data Validated Successfully", {
-          type: "success",
-        });
         router.push("/home");
       }
     };
