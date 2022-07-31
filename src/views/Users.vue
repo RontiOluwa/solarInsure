@@ -48,13 +48,14 @@
 import { defineComponent } from "vue";
 import Card from "../components/Layout/Card.vue";
 import Toggle from "../utils/toggleNav";
+import userType from "../types/Users";
 
 export default defineComponent({
   name: "Users",
   components: { Card },
   setup() {
     // List of Users
-    const users = [
+    const users: userType[] = [
       {
         no: 1,
         firstName: "Joel",
