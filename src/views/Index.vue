@@ -8,9 +8,9 @@
         </div>
         <div class="app__form mt-3">
           <Input
-            label="EMAIL OR USERNAME"
+            label="EMAIL ADDRESS"
             type="email"
-            placeholder="Enter your email or username"
+            placeholder="Enter your Email Address"
             @changeValue="getEmail"
           />
           <Input
